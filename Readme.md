@@ -7,7 +7,7 @@ This project features :
 - CertManager & Lets encrypt code exemple
 - A basic Proxmox firewall deployement script
 - A basic script to fetch and deploy github releases
-- A basic way to test locally using **k3d** and deploy using `make deploy` to a remote cluster
+- A basic way to test locally using **k3d** and deploy to a remote cluster
 
 ## Requirements
 
