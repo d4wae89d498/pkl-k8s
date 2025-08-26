@@ -1,0 +1,28 @@
+import "../../Settings.pkl" as Settings
+
+apiVersion = "cert-manager.io/v1"
+kind = "Certificate"
+metadata {
+  name = "demo-cert"
+  namespace = "default"
+}
+spec {
+  secretName = "demo-tls"
+  duration = "2160h"
+  renewBefore = "360h"
+  commonName = Settings.ingresses["demo"].domain
+  dnsNames {
+     Settings.ingresses["demo"].domain
+  }
+  issuerRef {
+    when (Settings.ingresses["demo"].tls.selfSigned)
+    {
+        name = "selfsigned-issuer"
+    }
+    else
+    {
+        name = "letsencrypt-issuer"
+    }
+    kind = "ClusterIssuer"
+  }
+}

@@ -1,0 +1,27 @@
+
+apiVersion = "cert-manager.io/v1"
+kind       = "ClusterIssuer"
+metadata {
+    name = "letsencrypt-issuer"
+}
+spec {
+    acme {
+        email = "contact@somecompany.com"
+
+        server = "https://acme-v02.api.letsencrypt.org/directory" 
+
+        privateKeySecretRef {
+            name = "letsencrypt-account-key"
+        }
+
+        solvers {
+            new {
+                http01 {
+                    ingress {
+                        ["class"] = "nginx"
+                    }
+                }
+            }
+        }
+    }
+}

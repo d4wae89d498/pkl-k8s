@@ -1,0 +1,19 @@
+amends "@k8s/api/core/v1/Service.pkl"
+
+metadata {
+  name = "nginx-service"
+}
+
+spec {
+  selector {
+    ["app"] = "nginx"
+  }
+  ports {
+    new { 
+      protocol = "TCP"
+      port = 80
+      targetPort = 80
+    }
+  }
+  type = "ClusterIP"
+}

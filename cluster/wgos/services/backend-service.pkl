@@ -1,0 +1,19 @@
+amends "@k8s/api/core/v1/Service.pkl"
+
+metadata {
+  name = "demo-backend-service"
+}
+
+spec {
+  selector {
+    ["app"] = "backend"
+  }
+  ports {
+    new { 
+      protocol = "TCP"
+      port = 4000
+      targetPort = 4000
+    }
+  }
+  type = "ClusterIP"
+}

@@ -1,0 +1,40 @@
+# Binaries
+pkl
+
+# Github releases
+releases
+
+# Temp files such as generated k8s yamls
+storage/tmp
+
+# Automation system/makefile stamps
+storage/.cluster_ready
+storage/.images_pulled
+
+# Deployements specifics
+#       WGOS
+storage/demo/nginx/logs
+storage/demo/nginx/public
+storage/demo/backend/documents
+storage/demo/backend/config.yaml
+storage/demo/mongo
+
+#       WGOS PRO
+
+storage/pro/nginx/logs
+storage/pro/nginx/public
+storage/pro/backend/.env
+
+#       OTHERS
+storage/nextcloud
+storage/mariadb
+storage/data
+
+# Secrets/config
+/Settings.pkl
+
+deploy.zip
+
+
+network/cluster.fw
+network/nodes.demo.sh

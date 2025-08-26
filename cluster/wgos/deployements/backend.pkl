@@ -1,0 +1,57 @@
+amends "@k8s/api/apps/v1/Deployment.pkl"
+
+import "../../../Settings.pkl" as Settings
+
+metadata {
+  name = "backend"
+}
+
+spec {
+  replicas = 2
+  selector {
+    matchLabels {
+      ["app"] = "backend"
+    }
+  }
+  template { 
+    metadata {
+      labels {
+        ["app"] = "backend"
+      }
+    }
+    spec {
+      containers {
+        new {
+          name  = "backend"
+          image = "demo-backend:latest"
+          imagePullPolicy = "Never"
+          ports {
+            new {
+              containerPort = 4000
+            }
+          }
+          volumeMounts {
+            new {
+              name      = "demo-storage"
+              mountPath = "/demo-backend/config.yaml"
+              subPath   = "demo/backend/config.yaml"
+            }
+            new {
+              name      = "demo-storage"
+              mountPath = "/demo-backend/documents"
+              subPath   = "demo/backend/documents"
+            }
+          }
+        }
+      }
+      volumes {
+        new {
+          name = "demo-storage"
+          persistentVolumeClaim {
+            claimName = "main-pvc"
+          }
+        }      
+      }
+    }
+  }
+}

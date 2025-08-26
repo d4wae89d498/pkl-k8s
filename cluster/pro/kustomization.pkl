@@ -1,0 +1,16 @@
+amends "../../templates/kustomize.config.k8s.io/v1beta1/Kustomization.pkl"
+
+namespace = "pro"
+
+resources {
+    "namespace.yaml"
+    "certificate.yaml"
+    "storages/main-pvc.yaml"
+    "deployements/nginx.yaml"
+    //"deployements/backend.yaml"
+    //"deployements/postgres.yaml"
+    "services/nginx-service.yaml"
+    //"services/backend-service.yaml"
+    //"services/postgres-service.yaml"
+    "ingress.yaml"
+}

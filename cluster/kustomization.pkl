@@ -1,0 +1,13 @@
+amends "../templates/kustomize.config.k8s.io/v1beta1/Kustomization.pkl"
+
+resources {
+    "issuers/selfsigned.yaml"
+    "issuers/letsencrypt.yaml"
+    "ingress-class.yaml"
+
+    "storages/main-pv.yaml"
+    
+    "demo"
+
+    "pro"
+}

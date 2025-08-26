@@ -1,0 +1,6 @@
+jwt_secret: "your_jwt_secret_key_here"
+app_url: "http://127.0.0.1"
+environment: "development"
+mongodb_url: "mongodb://mongo-service.demo.svc.cluster.local:27017"
+mongodb_name: "my_database"
+openai_api_key: "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

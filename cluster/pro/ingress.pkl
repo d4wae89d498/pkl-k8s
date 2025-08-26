@@ -1,0 +1,78 @@
+amends "@k8s/api/networking/v1/Ingress.pkl"
+
+import "../../Settings.pkl" as Settings
+
+metadata {
+  name = "ingress"
+  
+  annotations {
+    
+    ["nginx.ingress.kubernetes.io/enable-modsecurity"] = "true"
+    ["nginx.ingress.kubernetes.io/enable-owasp-core-rules"] = "true"
+    ["nginx.ingress.kubernetes.io/modsecurity-transaction-id"] = "$request_id"
+    ["nginx.ingress.kubernetes.io/modsecurity-snippet"] = """
+
+      SecRuleEngine On
+      SecAuditEngine RelevantOnly
+      SecAuditLogParts ABIJDEFHZ
+      SecAuditLogType Serial
+      SecAuditLog /dev/stdout
+
+      SecAction "id:900200, phase:1, nolog, pass, t:none, setvar:tx.allowed_methods=GET POST PUT DELETE OPTIONS HEAD"
+
+    """
+    
+    ["nginx.ingress.kubernetes.io/ssl-redirect"] = "true"
+    when (Settings.ingresses["pro"].tls.selfSigned)
+    {
+      ["cert-manager.io/cluster-issuer"] = "selfsigned-issuer"
+    }
+    else {
+      ["cert-manager.io/cluster-issuer"] = "letsencrypt-issuer"
+    }
+  }
+}
+spec {
+  ingressClassName = "nginx"
+  tls {
+    new {
+      hosts {
+          Settings.ingresses["pro"].domain
+      }
+      secretName = "pro-tls"
+    }
+  }
+  rules {
+    new {
+      host = Settings.ingresses["pro"].domain
+      http {
+        paths {
+          new {
+            path = "/"
+            pathType = "Prefix"
+            backend {
+              service {
+                name = "nginx-service"
+                port {
+                  number = 80
+                }
+              }
+            }
+          }
+         /* new {
+            path = "/api/"
+            pathType = "Prefix"
+            backend {
+              service {
+                name = "pro-backend-service"
+                port {
+                  number = 4000
+                }
+              }
+            }
+          }*/
+        }
+      }
+    }
+  }
+}

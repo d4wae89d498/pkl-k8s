@@ -1,0 +1,19 @@
+amends "@k8s/api/core/v1/Service.pkl"
+
+metadata {
+  name = "mongo-service"
+}
+
+spec {
+  selector {
+    ["app"] = "mongo"
+  }
+  ports {
+    new { 
+      protocol = "TCP"
+      port = 27017
+      targetPort = 27017
+    }
+  }
+  type = "ClusterIP"
+}

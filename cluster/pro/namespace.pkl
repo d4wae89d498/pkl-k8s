@@ -1,0 +1,5 @@
+amends "@k8s/api/core/v1/Namespace.pkl"
+
+metadata {
+  name = "pro"
+}

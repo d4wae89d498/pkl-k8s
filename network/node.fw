@@ -1,0 +1,13 @@
+[OPTIONS]
+enable: 1
+
+[RULES]
+#IN ACCEPT --proto icmp                                     # PING
+IN ACCEPT --proto tcp --source +allowed_ssh --dport 22      # SSH from specific IP
+IN ACCEPT --proto tcp --source +allowed_http --dport 80,443 # HTTP/HTTPS
+IN DROP                                                     # Block all other inbound traffic 
+
+OUT ACCEPT --proto udp --dport 53                           # Allow DNS (UDP port 53)
+OUT ACCEPT --proto udp --dport 123                          # Allow NTP (UDP port 123)
+OUT DROP --dest +local_networks                             # Reject everything that is goin to local_networks
+OUT ACCEPT                                                  # Accept the rest

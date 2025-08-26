@@ -1,0 +1,62 @@
+amends "@k8s/api/apps/v1/Deployment.pkl"
+
+import "../../../Settings.pkl" as Settings
+
+metadata {
+  name = "nginx"
+}
+
+spec {
+  replicas = 2
+  selector {
+    matchLabels {
+      ["app"] = "nginx"
+    }
+  }
+  template {
+    metadata {
+      labels {
+        ["app"] = "nginx"
+      }
+    }
+    spec {
+      containers {
+        new {
+          name  = "nginx"
+          image = "nginx:latest"
+          ports {
+            new {
+              containerPort = 80
+            }
+          }
+          volumeMounts {
+            new {
+              name      = "demo-storage"
+              mountPath = "/etc/nginx/conf.d"
+              subPath   = "demo/nginx/config"
+
+            }
+            new {
+              name      = "demo-storage"
+              mountPath = "/var/log/nginx"
+              subPath   = "demo/nginx/logs"
+            }
+            new {
+              name      = "demo-storage"
+              mountPath = "/usr/share/nginx/html"
+              subPath   = "demo/nginx/public"
+            }
+          }
+        }
+      }
+      volumes {
+        new {
+          name = "demo-storage"
+          persistentVolumeClaim {
+            claimName = "main-pvc"
+          }
+        }      
+      }
+    }
+  }
+}

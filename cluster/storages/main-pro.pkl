@@ -1,0 +1,18 @@
+amends "@k8s/api/core/v1/PersistentVolume.pkl"
+
+metadata {
+  name = "main-pro"
+}
+spec {
+  storageClassName = ""
+  capacity {
+    ["storage"] = 10.gib
+  }
+  accessModes {
+    "ReadWriteOnce"
+  }
+  hostPath {
+    path = "/storage/pro"
+  }
+  persistentVolumeReclaimPolicy = "Retain"
+}

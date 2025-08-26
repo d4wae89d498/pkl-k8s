@@ -1,0 +1,39 @@
+amends "./templates/Settings.pkl"
+
+cluster {
+    engine = "k3d"
+    name = "demo"
+}
+
+ingress  {
+    domain = "localhost"
+    tls  {
+        enabled = true
+        selfSigned = true
+    }
+    ports {
+        ["http"] = 80
+        ["https"] = 443
+    }
+}
+
+demo {
+    jwt_secret = "your_jwt_secret_key_here"
+    environment = "development"
+    openai_api_key = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    db {
+        name = "demo"
+    }
+}
+
+releases {
+    ["demo-backend"] {
+        tag = "latest"
+        allowPrerelease = true
+    }
+
+    ["demo-frontend"] {
+        tag = "latest"
+        allowPrerelease = true
+    }
+}

@@ -1,0 +1,42 @@
+
+local class Cluster {
+  engine: "k3s" | "k3d" = "k3s"
+  name: String
+}
+cluster: Cluster
+
+//////////////////////////////////////////////////////
+
+local class TlsConfig {
+  enabled: Boolean = true
+  selfSigned: Boolean = true
+}
+local class Ingress {
+  domain: String
+  tls: TlsConfig
+  ports: Mapping<String, UInt16>
+}
+ingresses: Mapping<String, Ingress>
+
+//////////////////////////////////////////////////////
+
+local open class DemoDB {
+  name: String
+}
+
+local open class Demo {
+  jwt_secret: String
+  environment: String
+  openai_api_key: String
+  db: DemoDB
+}
+demo: Demo
+
+//////////////////////////////////////////////////////
+
+
+local open class Release {
+    tag: String = "latest"
+    allowPrerelease: Boolean = true
+}
+releases: Mapping<String, Release>

@@ -1,0 +1,51 @@
+amends "@k8s/api/apps/v1/Deployment.pkl"
+
+import "../../../Settings.pkl" as Settings
+
+metadata {
+  name = "mongo"
+}
+
+spec {
+  replicas = 1
+  selector {
+    matchLabels {
+      ["app"] = "mongo"
+    }
+  }
+  template {
+    metadata {
+      labels {
+        ["app"] = "mongo"
+      }
+    }
+    spec {
+      containers {
+        new {
+          name  = "mongo"
+          image = "mongo:4.4"
+          ports {
+            new {
+              containerPort = 27017
+            }
+          }
+          volumeMounts {
+            new {
+              name      = "demo-storage"
+              mountPath = "/data/db"
+              subPath   = "demo/mongo/"
+            }
+          }
+        }
+      }
+      volumes {
+        new {
+          name = "demo-storage"
+          persistentVolumeClaim {
+            claimName = "main-pvc"
+          }
+        }      
+      }
+    }
+  }
+}

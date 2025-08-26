@@ -1,0 +1,13 @@
+[OPTIONS]
+enable: 1
+
+[IPSET allowed_ssh]
+x.x.x.x/32
+
+[IPSET allowed_http]
+x.x.x.x/24      # local
+
+
+[IPSET local_networks]
+x.x.x.x/16
+x:x:x:x::/56
