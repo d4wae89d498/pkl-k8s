@@ -12,14 +12,13 @@ storage/.cluster_ready
 storage/.images_pulled
 
 # Deployements specifics
-#       WGOS
+#       DEMO
 storage/demo/nginx/logs
 storage/demo/nginx/public
-storage/demo/backend/documents
 storage/demo/backend/config.yaml
 storage/demo/mongo
 
-#       WGOS PRO
+#       DEMOPRO
 
 storage/pro/nginx/logs
 storage/pro/nginx/public

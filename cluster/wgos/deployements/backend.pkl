@@ -36,11 +36,6 @@ spec {
               mountPath = "/demo-backend/config.yaml"
               subPath   = "demo/backend/config.yaml"
             }
-            new {
-              name      = "demo-storage"
-              mountPath = "/demo-backend/documents"
-              subPath   = "demo/backend/documents"
-            }
           }
         }
       }

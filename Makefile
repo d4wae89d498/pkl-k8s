@@ -32,7 +32,7 @@ update:
 pull:
 	make $(PULL_STAMP)
 $(PULL_STAMP): releases $(CLUSTER_STAMP)
-	@echo "Loading image WGOS BACKEND..."
+	@echo "Loading image DEMOBACKEND..."
 	@output="$$(docker load -i $$(ls releases/demo-backend/latest/demo-backend-*.tar | tail -n 1))"; \
 	echo "$$output"; \
 	image_tag="$$(echo "$$output" | grep 'Loaded image:' | awk -F': ' '{print $$2}')"; \
@@ -42,12 +42,12 @@ $(PULL_STAMP): releases $(CLUSTER_STAMP)
 	docker tag "$$name:$$tag" "$$name:latest"; \
 	echo "Importing $$name:latest into k3d..."; \
 	k3d image import "$$name:latest" -c demo
-	@echo "Loading image WGOS FRONTEND..."
+	@echo "Loading image DEMOFRONTEND..."
 	@rm -rf storage/demo/nginx/public/
 	@mkdir -p storage/demo/nginx/public/
 	@touch $(PULL_STAMP)
 	@unzip -o $$(ls releases/demo-frontend/latest/*.zip | tail -n 1) -d storage/demo/nginx/public/
-	@echo "Loading image WGOS PRO FRONTEND..."
+	@echo "Loading image DEMOPRO FRONTEND..."
 	@rm -rf storage/pro/nginx/public/
 	@mkdir -p storage/pro/nginx/public/
 	@touch $(PULL_STAMP)
