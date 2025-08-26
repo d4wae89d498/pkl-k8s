@@ -1,13 +1,17 @@
-
 # PKL-K8S
 
-An experimental project about using **Apple PKL language** to maintain a **Kubernetes** cluster under **Proxmox**. 
-This project features :
-- ModSecurity WAF ingress code exemple
-- CertManager & Lets encrypt code exemple
-- A basic Proxmox firewall deployement script
-- A basic script to fetch and deploy github releases
-- A basic way to test locally using **k3d** and deploy to a remote cluster
+An experimental project that uses the **Apple PKL language** to maintain a **Kubernetes** cluster under **Proxmox**.  
+
+This project features:
+- A ModSecurity WAF ingress code example  
+- A CertManager & Let's Encrypt code example  
+- A basic Proxmox firewall deployment script  
+- A basic script to fetch and deploy GitHub releases  
+- A simple way to test locally using **k3d** and deploy to a remote cluster  
+
+## License
+
+This project is licensed under the [Educational Community License version 2.0 (ECL-2.0)](https://opensource.org/license/ecl-2-0).
 
 ## Requirements
 
